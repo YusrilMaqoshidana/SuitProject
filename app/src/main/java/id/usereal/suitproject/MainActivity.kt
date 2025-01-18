@@ -22,10 +22,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SuitProjectTheme {
-                Surface {
-                    FirstScreen()
-                }
+                Navigation()
             }
         }
     }
 }
+

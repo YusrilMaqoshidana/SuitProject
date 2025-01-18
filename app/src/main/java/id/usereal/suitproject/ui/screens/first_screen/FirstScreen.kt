@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import id.usereal.suitproject.R
 import id.usereal.suitproject.common.avatar.Avatar
 import id.usereal.suitproject.common.button.LongButton
@@ -36,7 +37,7 @@ import id.usereal.suitproject.common.textfield.TextFieldGeneral
 import kotlinx.coroutines.launch
 
 @Composable
-fun FirstScreen(modifier: Modifier = Modifier, viewModel: FirstViewModel = hiltViewModel()) {
+fun FirstScreen(modifier: Modifier = Modifier, viewModel: FirstViewModel = hiltViewModel(), navController: NavController) {
     var name by remember { mutableStateOf("") }
     var palindrome by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
@@ -75,7 +76,7 @@ fun FirstScreen(modifier: Modifier = Modifier, viewModel: FirstViewModel = hiltV
         onNextClick = {
             val isNameNotEmpty = viewModel.validation(name)
             if (isNameNotEmpty) {
-                // Lakukan sesuatu jika nama tidak kosong
+                navController.navigate("second_screen/$name")
             } else {
                 scope.launch {
                     snackbarHostState.showSnackbar("Name cannot be empty!")
