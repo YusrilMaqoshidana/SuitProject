@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -21,10 +23,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import id.usereal.suitproject.R
 import id.usereal.suitproject.common.button.LongButton
@@ -43,24 +47,26 @@ fun SecondContent(modifier: Modifier = Modifier, navController: NavController, n
     Scaffold(
         modifier = modifier,
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "Second Screen",
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_backstack), // Ganti dengan nama file ikon di drawable
-                            contentDescription = "Back",
-                            modifier = Modifier.size(24.dp) // Sesuaikan ukuran ikon jika diperlukan
+            Column {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            text = "Second Screen",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.W600
                         )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_backstack), // Ganti dengan ikon di drawable
+                                contentDescription = "Back"
+                            )
+                        }
                     }
-                },
-                modifier = Modifier.fillMaxWidth()
-
-            )
+                )
+                HorizontalDivider(color = Color.Gray.copy(alpha = 0.2f), thickness = 1.dp)
+            }
         },
     ) { innerPadding ->
         Column(
@@ -88,7 +94,9 @@ fun SecondContent(modifier: Modifier = Modifier, navController: NavController, n
             )
             LongButton(
                 text = "Choose a User",
-                onClick = {  },
+                onClick = {
+                    navController.navigate("third_screen")
+                },
                 modifier = Modifier.padding(10.dp)
             )
         }

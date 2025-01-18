@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import id.usereal.suitproject.ui.screens.first_screen.FirstScreen
 import id.usereal.suitproject.ui.screens.second_screen.SecondScreen
+import id.usereal.suitproject.ui.screens.third_screen.ThirdScreen
 
 @Composable
 fun Navigation(modifier: Modifier = Modifier) {
@@ -19,6 +20,9 @@ fun Navigation(modifier: Modifier = Modifier) {
         composable("second_screen/{name}") { backStackEntry ->
             val name = backStackEntry.arguments?.getString("name") ?: ""
             SecondScreen(navController = navController, name = name)
+        }
+        composable("third_screen"){
+            ThirdScreen(navController = navController)
         }
     }
 }
