@@ -26,10 +26,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import id.usereal.suitproject.R
-import id.usereal.suitproject.common.avatar.Avatar
 import id.usereal.suitproject.common.avatar.AvatarUser
 import id.usereal.suitproject.common.card.CardComponent
 import id.usereal.suitproject.data.model.UserResponse
+import id.usereal.suitproject.utils.ShimmerListItem
 import id.usereal.suitproject.utils.UiState
 
 @Composable
@@ -87,12 +87,16 @@ fun ThirdContent(
         ) {
             when (usersState) {
                 is UiState.Loading -> {
-                    Text(text = "Loading...", fontSize = 16.sp)
+                    LazyColumn {
+                        items(11){
+                            ShimmerListItem(isLoading = true)
+                        }
+                    }
                 }
 
                 is UiState.Success -> {
                     LazyColumn {
-                        items(usersState.data.data) { user -> // 'data' adalah List<DataItem>
+                        items(usersState.data.data) { user ->
                             CardComponent(
                                 title = "${user.firstName} ${user.lastName}",
                                 subtitle = user.email,
@@ -100,6 +104,8 @@ fun ThirdContent(
                                     AvatarUser(imageUrl = user.avatar)
                                 },
                                 onClick = {
+                                    navController.popBackStack()
+                                    navController.popBackStack()
                                     navController.navigate("second_screen/${user.firstName} ${user.lastName}")
                                 }
                             )
