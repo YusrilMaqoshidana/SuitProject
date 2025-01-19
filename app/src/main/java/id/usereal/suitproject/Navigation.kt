@@ -17,12 +17,20 @@ fun Navigation(modifier: Modifier = Modifier) {
         composable("first_screen") {
             FirstScreen(navController = navController)
         }
-        composable("second_screen/{name}") { backStackEntry ->
+        composable("second_screen/{name}?selectedUser={selectedUser}") { backStackEntry ->
             val name = backStackEntry.arguments?.getString("name") ?: ""
-            SecondScreen(navController = navController, name = name)
+            val nameUser = backStackEntry.arguments?.getString("selectedUser") ?: "Selected User Name"
+            SecondScreen(
+                navController = navController, name = name,
+                nameUser = nameUser
+            )
         }
-        composable("third_screen"){
-            ThirdScreen(navController = navController)
+        composable("third_screen/{name}") {
+            val name = it.arguments?.getString("name") ?: ""
+            ThirdScreen(
+                navController = navController,
+                name = name,
+            )
         }
     }
 }

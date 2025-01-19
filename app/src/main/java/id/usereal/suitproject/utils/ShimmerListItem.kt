@@ -67,7 +67,6 @@ fun ShimmerListItem(
     }
 }
 
-
 fun Modifier.shimmerEffect(isShimmering: Boolean): Modifier = composed {
     if (isShimmering) {
         var size by remember { mutableStateOf(IntSize.Zero) }

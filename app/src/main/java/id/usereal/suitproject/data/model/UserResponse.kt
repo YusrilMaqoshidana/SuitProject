@@ -1,5 +1,7 @@
 package id.usereal.suitproject.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class UserResponse(
@@ -31,14 +33,14 @@ data class Support(
 	@field:SerializedName("url")
 	val url: String
 )
-
+@Entity(tableName = "users")
 data class DataItem(
+	@PrimaryKey
+	@field:SerializedName("id")
+	val id: Int,
 
 	@field:SerializedName("last_name")
 	val lastName: String,
-
-	@field:SerializedName("id")
-	val id: Int,
 
 	@field:SerializedName("avatar")
 	val avatar: String,
